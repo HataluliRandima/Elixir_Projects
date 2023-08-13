@@ -10,6 +10,7 @@ defmodule SimpleQueue.Application do
     children = [
       # Starts a worker by calling: SimpleQueue.Worker.start_link(arg)
       # {SimpleQueue.Worker, arg}
+      SimpleQueue
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -18,3 +19,16 @@ defmodule SimpleQueue.Application do
     Supervisor.start_link(children, opts)
   end
 end
+
+# def start(_type, _args) do
+#   children = [SimpleQueue]
+#   opts = [strategy: :one_for_one, name: SimpleQueue.Supervisor]
+#   Supervisor.start_link(children, opts)
+# end
+
+
+# def start(_type, _args) do
+#   children = [{SimpleQueue, [1, 2, 3]}]
+#   opts = [strategy: :one_for_one, name: SimpleQueue.Supervisor]
+#   Supervisor.start_link(children, opts)
+# end

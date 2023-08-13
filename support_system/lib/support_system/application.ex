@@ -9,7 +9,8 @@ defmodule SupportSystem.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: SupportSystem.Worker.start_link(arg)
-      # {SupportSystem.Worker, arg}
+      # {SupportSystem.Worker, arg}'
+      SupportSystem.TicketSupervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

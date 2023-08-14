@@ -33,3 +33,16 @@ iex(2)> Supervisor.which_children(OurNewApp.CounterSup)
   {10000, #PID<0.162.0>, :worker, [OurNewApp.Counter]}
 ]
 
+## Many developers consider custom supervisors tricky and avoid using them. So let's do some simple exercises to get more acquainted with them.
+
+### First, we'll add a third counter to our counter supervisor at runtime:
+iex(3)> new_child_spec = Supervisor.child_spec({OurNewApp.Counter, 30000}, id: 30000)
+%{id: 30000, start: {OurNewApp.Counter, :start_link, [30000]}}
+iex(4)> Supervisor.start_child(OurNewApp.CounterSup, new_child_spec)
+{:ok, #PID<0.169.0>}
+iex(5)> Supervisor.which_children(OurNewApp.CounterSup)
+[
+  {30000, #PID<0.169.0>, :worker, [OurNewApp.Counter]},
+  {20000, #PID<0.163.0>, :worker, [OurNewApp.Counter]},
+  {10000, #PID<0.162.0>, :worker, [OurNewApp.Counter]}
+]

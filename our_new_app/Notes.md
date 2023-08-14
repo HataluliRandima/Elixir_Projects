@@ -23,3 +23,13 @@ true
 iex(4)> Supervisor.which_children(OurNewApp.Supervisor)
 [{OurNewApp.Counter, #PID<0.146.0>, :worker, [OurNewApp.Counter]}]
 
+## iex -S mix
+...
+iex(1)> Supervisor.which_children(OurNewApp.Supervisor)
+[{OurNewApp.CounterSup, #PID<0.161.0>, :supervisor, [OurNewApp.CounterSup]}]
+iex(2)> Supervisor.which_children(OurNewApp.CounterSup)
+[
+  {20000, #PID<0.163.0>, :worker, [OurNewApp.Counter]},
+  {10000, #PID<0.162.0>, :worker, [OurNewApp.Counter]}
+]
+
